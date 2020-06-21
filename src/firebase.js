@@ -2,15 +2,15 @@ import * as firebase from 'firebase';
 
 
 const config = {
-    apiKey: "AIzaSyAUV-EUZIrFFJyjP6hzwJv_tyokdBfogpY",
-    authDomain: "presence-detector-8d3bb.firebaseapp.com",
-    databaseURL: "https://presence-detector-8d3bb.firebaseio.com",
-    projectId: "presence-detector-8d3bb",
-    storageBucket: "presence-detector-8d3bb.appspot.com",
-    messagingSenderId: "692739385934",
-    appId: "1:692739385934:web:272264d23f8243fd5cb11f",
-    measurementId: "G-DBJ4W9FQEC"
-  };
+  apiKey: "AIzaSyAKmOUurFTSOD6NYcd_ZRGYJEwY1Rf0ESk",
+  authDomain: "online-presence-detector.firebaseapp.com",
+  databaseURL: "https://online-presence-detector.firebaseio.com",
+  projectId: "online-presence-detector",
+  storageBucket: "online-presence-detector.appspot.com",
+  messagingSenderId: "107091636746",
+  appId: "1:107091636746:web:526daae7024e0f89aaa5f3",
+  measurementId: "G-5NCDLNT613"
+};
 
 firebase.initializeApp(config);
 

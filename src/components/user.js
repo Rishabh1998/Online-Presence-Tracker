@@ -171,7 +171,9 @@ class User extends Component {
             
         }
         return(
-            <div className="container">
+            
+            <div className="sign_up">
+                <h2>Sign up form</h2>
                 { this.state.status?
                 <form onSubmit={this.submitForm}>
 
@@ -184,7 +186,7 @@ class User extends Component {
                     <button type="submit">Submit</button>
                 </form>
                 :
-                 <Redirect to="/login" />
+                 <Redirect to="/" />
                 }
                 {
             this.state.error?

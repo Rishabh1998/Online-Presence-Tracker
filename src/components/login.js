@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { firebase, googleAuth, firebaseDB } from '../firebase';
+import { firebaseDB } from '../firebase';
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
 
@@ -61,6 +62,8 @@ class Login extends Component {
             })
             if (id !== ''){
                 firebaseDB.ref("users/"+id+"/session").set(true)
+                // {<Redirect to="/" />}
+                // window.location.href = "/"
             }
             else{
                 this.setState({error: true})
@@ -92,7 +95,7 @@ class Login extends Component {
         return(
             <div >
                 { this.state.status?
-                    <div className="container">
+                    <div className="sign_up">
                     <form onSubmit={this.onshandler}>
                         <div className="form_element">
                             <label>Enter username</label>

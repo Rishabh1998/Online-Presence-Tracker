@@ -32,6 +32,7 @@ class Presence extends Component{
             snapshot.forEach((child) => {
                 console.log("child", child.val())
                     if(child.val().session){
+                        if(child.val().username !== this.state.username)
                         firebaseUsers.push(child.val().name)
                         console.log("data firebase", firebaseUsers)
                     }else{
@@ -79,11 +80,14 @@ class Presence extends Component{
        return(
            <div>
         { !this.state.status?
-           <div className="container">
+           <div className="sign_up">
                
                
                <h2>Online Users: </h2>
-               {users.slice(0,3)}
+               {users.length == 0?
+               <div> No one else is currenly online</div>
+            :
+            users.slice(0,3)}
                {usernames.length - 3 <= 0?null:
        <div className="user tooltip numberCircle"><span class="tooltiptext">{usernames.slice(3)}</span>+{usernames.length-3}</div>
                }
