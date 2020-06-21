@@ -23,15 +23,16 @@ class Presence extends Component{
         if(!!localStorage.getItem('username') && this.state.username !== localStorage.getItem('username')){
             let t = localStorage.getItem('status') === "false"?false:true
             this.setState({username: localStorage.getItem('username'), status: t})
-            
+            // firebaseDB.ref("users/"+localStorage.getItem('id')+"/timestamp").set(Date.now())
         }
-        
         let firebaseUsers = [], offlineUsers = [], timestamps = []
         firebaseDB.ref('users').on('value', (snapshot) => {
             console.log("triggered")
             snapshot.forEach((child) => {
                 console.log("child", child.val())
-                    if(child.val().session){
+                let time = Date.now()
+                let userTime = child.val().timestamp
+                    if(child.val().session && ((time - userTime)/60000 <= 1.00)){
                         if(child.val().username !== this.state.username)
                         firebaseUsers.push(child.val().name)
                         console.log("data firebase", firebaseUsers)
@@ -42,6 +43,7 @@ class Presence extends Component{
             })
             if(JSON.stringify(this.state.users) !== JSON.stringify(firebaseUsers) || JSON.stringify(this.state.offlineUsers) !== JSON.stringify(offlineUsers)){
                 this.setState({users: firebaseUsers, offlineUsers: offlineUsers, timestamps: timestamps})
+                // firebaseDB.ref("users/"+localStorage.getItem('id')+"/timestamp").set(Date.now())
                 firebaseUsers = []
             }
         
@@ -84,8 +86,11 @@ class Presence extends Component{
                
                
                <h2>Online Users: </h2>
-               {users.length == 0?
-               <div> No one else is currenly online</div>
+               {
+               offlineUsersView.length == 0?
+               <h3>Please! Wait while Loading...</h3>:
+               users.length == 0?
+               <h3> No one else is currenly online</h3>
             :
             users.slice(0,3)}
                {usernames.length - 3 <= 0?null:
@@ -93,7 +98,10 @@ class Presence extends Component{
                }
                
                <h2 className="padding">Offline Users: </h2>
-               {offlineUsersView}
+               {offlineUsersView.length == 0?
+               <h3>Please! Wait while Loading...</h3>
+               :
+               offlineUsersView}
                
                </div>
             :
